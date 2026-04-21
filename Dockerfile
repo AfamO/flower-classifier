@@ -14,4 +14,6 @@ RUN pip install -r requirements.txt
 EXPOSE 8080
 
 # The command to launch streamlit app and expose it's port 8080, when container is up and running
-CMD streamlit run app.py --server.port=8080
+#CMD streamlit run app.py --server.port=8080
+# Command to run the Streamlit app
+ENTRYPOINT ["streamlit", "run", "app.py", "--server.port=8501"]
