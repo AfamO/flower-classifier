@@ -1,4 +1,5 @@
 import joblib
+import sklearn
 from sklearn.ensemble import RandomForestClassifier;
 from  sklearn.model_selection import train_test_split;
 from sklearn.metrics import accuracy_score;
@@ -10,13 +11,13 @@ iris_df = pd.read_csv("data/iris.csv")
 
 iris_df = datasets.load_iris();
 print(iris_df.target_names);
-#print(iris_df);
+print(iris_df);
 #iris_df.sample(frac=1, random_state=seed)
 # selecting features and target data
 # split data into train and test sets
 # 70% training and 30% test
 X, y = datasets.load_iris(return_X_y=True);
-print("Y==",y)
+#print("Y==",y)
 X_train, X_test, y_train, y_test = train_test_split(
 X, y, test_size=0.3, random_state=2023)
 # create an instance of the random forest classifier
@@ -34,3 +35,5 @@ print("Weighted Score::")
 print(classification_report(y_test,y_pred));
 
 joblib.dump(clf, "rf_model.sav");
+print("Model saved to disk as rf_model.sav")
+print("Sklearn version==", sklearn.__version__);

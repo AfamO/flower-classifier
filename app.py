@@ -23,5 +23,6 @@ irisTypes = ["Setosa","Versicolor","Virginica"];
 if st.button("Predict Iris Type"):
     result = predict(np.array([[sepal_l, sepal_w, petal_l, petal_w]]));
     index = result[0];
-    #print(irisTypes[index]);
     st.text(irisTypes[index]);
+    st.toast("The predicted iris type is:: "+irisTypes[index], icon="✅", duration=5000);
+    st.success(irisTypes[index], icon="✅");
