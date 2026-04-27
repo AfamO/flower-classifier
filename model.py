@@ -7,7 +7,7 @@ from sklearn import datasets;
 from sklearn.metrics import classification_report,confusion_matrix;
 import pandas as pd;
 # Read original dataset
-iris_df = pd.read_csv("data/iris.csv")
+#iris_df = pd.read_csv("data/iris.csv")
 
 iris_df = datasets.load_iris();
 print(iris_df.target_names);
