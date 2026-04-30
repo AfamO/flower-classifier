@@ -1,19 +1,22 @@
-# Base image of python 3.8
-FROM python:3.8
+# app/Dockerfile
 
-# Setup the working directory
+FROM python:3.12-slim
+
 WORKDIR /app
 
-# Copy files fromj the current directory to the working directory
-COPY . /app
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    curl \
+    software-properties-common \
+    git \
+    && rm -rf /var/lib/apt/lists/*
 
-# Install all the dependencies for the app
-RUN pip install -r requirements.txt
+RUN git clone https://github.com/streamlit/streamlit-example.git .
 
-# Expose port 8080 of the container for listening
-EXPOSE 8080
+RUN pip3 install -r requirements.txt
 
-# The command to launch streamlit app and expose it's port 8080, when container is up and running
-#CMD streamlit run app.py --server.port=8080
-# Command to run the Streamlit app
-ENTRYPOINT ["streamlit", "run", "app.py", "--server.port=8501"]
+EXPOSE 8501
+
+HEALTHCHECK CMD curl --fail http://localhost:8501/_stcore/health
+
+ENTRYPOINT ["streamlit", "run", "app.py", "--server.port=8501", "--server.address=0.0.0.0"]
